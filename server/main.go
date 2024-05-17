@@ -3,14 +3,12 @@ package main
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/dmls/discormb/server/handlers"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome to your discormb server!")
-}
-
 func main() {
-	http.HandleFunc("/", handler)
-	fmt.Println("Server is running on http://localhost:8080")
+	http.HandleFunc("/ws", handlers.WebSocketHandler)
+	fmt.Println("Server is running on http://localhost:8080/ws")
 	http.ListenAndServe(":8080", nil)
 }
